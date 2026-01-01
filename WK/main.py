@@ -68,7 +68,7 @@ while running:
     # Lưu ý: truyền tile_group vào update của player để check va chạm
     player.sprite.update(projectile_group, tile_group) 
     
-    enemies_group.update()
+    enemies_group.update(player, tiles=tile_group) # Truyền tile_group để xử lý va chạm đất
     projectile_group.update()
     item_group.update()
     # (Tile không cần update vì nó đứng yên, trừ khi làm camera)
@@ -126,4 +126,5 @@ while running:
 
 pygame.quit()
 sys.exit()
+
 git add .
