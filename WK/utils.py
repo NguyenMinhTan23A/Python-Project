@@ -6,7 +6,6 @@ from PIL import Image
 def load_gif_frames(gif_name, scale_size):
     """Hàm hỗ trợ đọc file GIF và trả về list ảnh cho Pygame"""
     frames = []
-    # Tự động tìm đường dẫn tới thư mục assets
     base_path = os.path.dirname(__file__)
     file_path = os.path.join(base_path, 'assets', gif_name)
     
@@ -20,11 +19,10 @@ def load_gif_frames(gif_name, scale_size):
             )
             pygame_image = pygame.transform.scale(pygame_image, scale_size)
             frames.append(pygame_image)
-        print(f"Đã tải {gif_name}: {len(frames)} frames")
+        # print(f"Đã tải {gif_name}: {len(frames)} frames")
         return frames
     except Exception as e:
-        print(f"LỖI load_gif_frames: {e}")
-        # Trả về hình vuông dự phòng nếu lỗi
+        print(f"LỖI load_gif_frames {gif_name}: {e}")
         surf = pygame.Surface(scale_size)
         surf.fill((255, 0, 0)) 
         return [surf]

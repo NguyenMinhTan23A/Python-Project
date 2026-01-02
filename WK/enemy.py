@@ -18,5 +18,4 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.x += x_shift
         
         if self.rect.right >= SCREEN_WIDTH + 200 or self.rect.left <= -200:
-
             self.direction *= -1
