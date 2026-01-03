@@ -9,12 +9,9 @@ class Projectile(pygame.sprite.Sprite):
         base_path = os.path.dirname(__file__)
         img_path = os.path.join(base_path, 'assets', 'shuriken.png')
         
-        try:
-            original_image = pygame.image.load(img_path).convert_alpha()
-            self.image = pygame.transform.scale(original_image, PROJECTILE_SIZE)
-        except:
-            self.image = pygame.Surface(PROJECTILE_SIZE)
-            self.image.fill((200, 200, 200))
+        # Bắt buộc load ảnh
+        original_image = pygame.image.load(img_path).convert_alpha()
+        self.image = pygame.transform.scale(original_image, PROJECTILE_SIZE)
 
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
