@@ -1,14 +1,14 @@
 # item.py
 import pygame
+import os
 from settings import *
 
 class Item(pygame.sprite.Sprite):
     def __init__(self, x, y, item_type):
         super().__init__()
         self.item_type = item_type
-        self.image = pygame.Surface((30, 30))
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y) 
+        self.image = None
+        self.rect = None
 
     def update(self, x_shift=0):
         self.rect.x += x_shift
@@ -16,21 +16,44 @@ class Item(pygame.sprite.Sprite):
 class AmmoItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'ammo') 
-        self.image.fill((0, 0, 255))
-        pygame.draw.rect(self.image, (255, 255, 255), (10, 5, 10, 20))
+        
+        base_path = os.path.dirname(__file__)
+        img_path = os.path.join(base_path, 'assets', 'ammo.png')
+        ITEM_SIZE = (30, 30)
+
+        # Bắt buộc load ảnh
+        original_image = pygame.image.load(img_path).convert_alpha()
+        self.image = pygame.transform.scale(original_image, ITEM_SIZE)
+        
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
 
 class HealthPotion(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'health') 
-        self.image.fill((255, 0, 0))    
-        pygame.draw.rect(self.image, (255, 255, 255), (10, 5, 10, 20))
-        pygame.draw.rect(self.image, (255, 255, 255), (5, 10, 20, 10))
+        
+        base_path = os.path.dirname(__file__)
+        img_path = os.path.join(base_path, 'assets', 'potion.png')
+        ITEM_SIZE = (30, 30)
 
-# --- THÊM CLASS CHÌA KHÓA ---
+        # Bắt buộc load ảnh
+        original_image = pygame.image.load(img_path).convert_alpha()
+        self.image = pygame.transform.scale(original_image, ITEM_SIZE)
+            
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
 class KeyItem(Item):
     def __init__(self, x, y):
         super().__init__(x, y, 'key')
-        self.image.fill((255, 255, 0)) # Màu Vàng Chanh
-        # Vẽ hình chìa khóa đơn giản (cán tròn + thân dài)
-        pygame.draw.circle(self.image, (0,0,0), (10, 10), 4)
-        pygame.draw.line(self.image, (0,0,0), (10, 14), (20, 24), 3)
+        
+        base_path = os.path.dirname(__file__)
+        img_path = os.path.join(base_path, 'assets', 'key.png')
+        KEY_SIZE = (40, 40)
+        
+        # Bắt buộc load ảnh
+        original_image = pygame.image.load(img_path).convert_alpha()
+        self.image = pygame.transform.scale(original_image, KEY_SIZE)
+
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
